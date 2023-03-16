@@ -6,7 +6,7 @@ function App() {
   return (
     <>
     {/* <Navbar title='umang' home='uhome' /> */}
-    <Navbar  home='uhome' />
+    <Navbar  home='uhome' search={false}/>
     </>
   );
 }
