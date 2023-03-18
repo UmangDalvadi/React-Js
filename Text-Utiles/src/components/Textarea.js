@@ -1,30 +1,87 @@
 import React, { useState } from 'react'
 
 
-const Textarea = () => {
+const Textarea = (props) => {
     const [text, settext] = useState('')
 
-    const handleonclick=() => {
-        let up=text.toUpperCase()
+    const handleonclickupper = () => {
+        let up = text.toUpperCase()
         settext(up)
     }
+    const handleonclicklower = () => {
+        let low = text.toLowerCase()
+        settext(low)
+    }
+    const handleonclickclear = () => {
+        let clear = ""
+        settext(clear)
+    }
+    const handleonclickcopytext = () => {
+        // text.select()
+        // text.setSelectionRange(0, 99999); 
+        navigator.clipboard.writeText(text);
+        // alert("done")
+        document.getElementById('copy').innerHTML = 'Copied!'
+        setTimeout(() => document.getElementById('copy').innerHTML = 'Copy to clipboard', 500);
+        // document.getElementById('copy').innerHTML='Copy to clipboard'
+    }
 
-    const handleonchange=(event) => {
+
+    const handleonchange = (event) => {
         settext(event.target.value)
     }
 
+    // const [mode, changemode] = useState({
+    //     backgroundColor: 'white',
+    //     color: 'black'
+    // })
+
+    // const[btn,chbtn]=useState('Enable DarkMode')
+
+    // // let mode={
+    // //     backgroundColor:'dark',
+    // //     color:'black'
+    // // }
+
+    // const handleonclickmode = () => {
+    //     if (mode.color === "black") {
+    //         changemode({
+    //             backgroundColor: 'black',
+    //             color: 'white',
+    //         })
+    //         chbtn('Enable LightMode')
+    //     }
+    //     else {
+    //         changemode({
+    //             backgroundColor: 'white',
+    //             color: 'black'
+    //         })
+    //         chbtn('Enable Darkmode')
+    //     }
+    // }
 
     return (
         <>
-            <div className='container my-3'>
-                <h3>Enter the text below</h3>
+            <div className='container my-3' >
+                <h3 style={{color:props.mode==='light'?'black':'white'}}>Enter the text below</h3>
                 <form>
                     <div className="form-group">
-                        {/* <label HTMLfor="exampleFormControlTextarea1">Example textarea</label> */}
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="10" value={text} onChange={handleonchange} placeholder="enter your text"></textarea>
+                        {/* <label htmlFor="exampleFormControlTextarea1">Example textarea</label> */}
+                        <textarea className="form-control" style={{color:props.mode==='light'?'black':'white',backgroundColor:props.mode==='light'?'white':'#404f5d'}} id="exampleFormControlTextarea1" rows="10" value={text} onChange={handleonchange} placeholder="enter your text"></textarea>
                     </div>
                 </form>
-                <button className="btn btn-primary" onClick={handleonclick}>Convert UpperCase</button>
+                <button className="btn btn-primary mx-2 my-2" onClick={handleonclickupper}>Convert UpperCase</button>
+                <button className="btn btn-primary mx-2 my-2" onClick={handleonclicklower}>Convert LowerCase</button>
+                <button className="btn btn-primary mx-2 my-2" onClick={handleonclickclear}>Clear text</button>
+                <button className="btn btn-primary mx-2 my-2" id='copy' onClick={handleonclickcopytext} >Copy to clipboard</button>
+                {/* <button className="btn btn-primary " onClick={handleonclickmode} >{btn}</button> */}
+            </div>
+            <div className="container" style={{color:props.mode==='light'?'black':'white'}} >
+                <h3>
+                    Your text summery
+                </h3>
+                <p>{(text.split(" ").length)} Words and {text.length} characters {text.split(/\r\n|\r|\n/).length} Lines</p>
+                <p>{0.008 * (text.split(" ").length)} Minuts to read it!</p>
             </div>
         </>
     )
