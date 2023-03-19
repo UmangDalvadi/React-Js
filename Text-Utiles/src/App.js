@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import { useState } from 'react';
 import './App.css';
+import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import Textarea from './components/Textarea';
 
@@ -20,12 +21,25 @@ function App() {
     }
   }
 
+  const [alert, setalert] = useState(null)
+
+  const showalert = (message, type) => {
+    setalert({
+      msg: message,
+      type: type
+    })
+    setTimeout(() => {
+      setalert(null);
+    }, 1500)
+  }
+
 
   return (
     < >
 
       <Navbar title="Textutils" mode={mode} modefun={modefun} />
-      <Textarea mode={mode} />
+      <Alert alert={alert} />
+      <Textarea mode={mode} showalert={showalert}/>
     </>
   );
 }

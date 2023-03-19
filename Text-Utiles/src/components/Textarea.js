@@ -7,10 +7,13 @@ const Textarea = (props) => {
     const handleonclickupper = () => {
         let up = text.toUpperCase()
         settext(up)
+        props.showalert('Coverted to UpperCase', 'success ')
     }
     const handleonclicklower = () => {
         let low = text.toLowerCase()
         settext(low)
+        props.showalert('Coverted to LowerCase', 'success ')
+
     }
     const handleonclickclear = () => {
         let clear = ""
@@ -22,7 +25,9 @@ const Textarea = (props) => {
         navigator.clipboard.writeText(text);
         // alert("done")
         document.getElementById('copy').innerHTML = 'Copied!'
-        setTimeout(() => document.getElementById('copy').innerHTML = 'Copy to clipboard', 500);
+        setTimeout(() => document.getElementById('copy').innerHTML = 'Copy to clipboard', 1500);
+        props.showalert('Copied!!', 'success')
+
         // document.getElementById('copy').innerHTML='Copy to clipboard'
     }
 
@@ -63,11 +68,11 @@ const Textarea = (props) => {
     return (
         <>
             <div className='container my-3' >
-                <h3 style={{color:props.mode==='light'?'black':'white'}}>Enter the text below</h3>
+                <h3 style={{ color: props.mode === 'light' ? 'black' : 'white' }}>Enter the text below</h3>
                 <form>
                     <div className="form-group">
                         {/* <label htmlFor="exampleFormControlTextarea1">Example textarea</label> */}
-                        <textarea className="form-control" style={{color:props.mode==='light'?'black':'white',backgroundColor:props.mode==='light'?'white':'#404f5d'}} id="exampleFormControlTextarea1" rows="10" value={text} onChange={handleonchange} placeholder="enter your text"></textarea>
+                        <textarea className="form-control" style={{ color: props.mode === 'light' ? 'black' : 'white', backgroundColor: props.mode === 'light' ? 'white' : '#404f5d' }} id="exampleFormControlTextarea1" rows="10" value={text} onChange={handleonchange} placeholder="enter your text"></textarea>
                     </div>
                 </form>
                 <button className="btn btn-primary mx-2 my-2" onClick={handleonclickupper}>Convert UpperCase</button>
@@ -76,12 +81,12 @@ const Textarea = (props) => {
                 <button className="btn btn-primary mx-2 my-2" id='copy' onClick={handleonclickcopytext} >Copy to clipboard</button>
                 {/* <button className="btn btn-primary " onClick={handleonclickmode} >{btn}</button> */}
             </div>
-            <div className="container" style={{color:props.mode==='light'?'black':'white'}} >
+            <div className="container" style={{ color: props.mode === 'light' ? 'black' : 'white' }} >
                 <h3>
                     Your text summery
                 </h3>
-                <p>{(text.split(" ").length)} Words and {text.length} characters {text.split(/\r\n|\r|\n/).length} Lines</p>
-                <p>{0.008 * (text.split(" ").length)} Minuts to read it!</p>
+                <p>{(text.split(" ").length)} Words, {text.length} characters, {text.split(/\r\n|\r|\n/).length} Lines</p>
+                <p>Avg {0.008 * (text.split(" ").length)} Minuts to read it!</p>
             </div>
         </>
     )
