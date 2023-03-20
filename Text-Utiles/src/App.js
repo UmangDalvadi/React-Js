@@ -26,7 +26,6 @@ function App() {
     else {
       changemode('light')
       document.body.style.backgroundColor = 'white'
-
     }
   }
 
@@ -46,14 +45,14 @@ function App() {
   return (
     < >
 
-      <Alert alert={alert} />
       <Router>
 
         <Navbar title="Textutils" mode={mode} modefun={modefun} />
+        <Alert alert={alert} />
 
         <Routes>
 
-          <Route exact path="/about" element={<About />} />
+          <Route exact path="/about" element={<About mode={mode} />} />
           {/* <About />
           </Route> */}
           <Route exact path="/" element={<Textarea mode={mode} showalert={showalert} />} />

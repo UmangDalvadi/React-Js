@@ -68,7 +68,7 @@ const Textarea = (props) => {
     return (
         <>
             <div className='container my-3' >
-                <h3 style={{ color: props.mode === 'light' ? 'black' : 'white' }}>Enter the text below</h3>
+                <h3 style={{ color: props.mode === 'light' ? 'black' : 'white' }} className=' my-3'>Enter the text below</h3>
                 <form>
                     <div className="form-group">
                         {/* <label htmlFor="exampleFormControlTextarea1">Example textarea</label> */}
